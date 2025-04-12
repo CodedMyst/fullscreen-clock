@@ -6,20 +6,21 @@
     <title>Fullscreen Clock</title>
     <style>
         body {
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #282c34;
-            color: white;
-            font-family: Arial, sans-serif;
-            font-size: 48px;
+            background-color: #121212; /* Dark background for reduced eye strain */
+            color: #FFFFFF; /* White text color */
+            font-family: 'Arial', sans-serif;
+            font-size: 5rem; /* Large font size */
+            overflow: hidden; /* Prevent scrolling */
         }
     </style>
 </head>
 <body>
-    <div id="clock">00:00:00</div>
+    <div id="clock"></div>
     <script>
         function updateClock() {
             const now = new Date();
@@ -28,8 +29,25 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
+
+        function enterFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // Update clock every second
         setInterval(updateClock, 1000);
-        updateClock(); // Initial call
+        updateClock(); // Initial call to display clock immediately
+
+        // Enter fullscreen on load
+        window.onload = enterFullscreen;
     </script>
 </body>
 </html>
