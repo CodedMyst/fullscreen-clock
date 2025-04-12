@@ -14,13 +14,17 @@
             background-color: #121212; /* Dark background for reduced eye strain */
             color: #FFFFFF; /* White text color */
             font-family: 'Arial', sans-serif;
-            font-size: 5rem; /* Large font size */
+            font-size: 10vw; /* Responsive font size based on viewport width */
             overflow: hidden; /* Prevent scrolling */
+        }
+        #clock {
+            text-align: center;
+            width: 100%; /* Full width */
         }
     </style>
 </head>
 <body>
-    <div id="clock"></div>
+    <div id="clock">Loading...</div>
     <script>
         function updateClock() {
             const now = new Date();
@@ -47,7 +51,10 @@
         updateClock(); // Initial call to display clock immediately
 
         // Enter fullscreen on load
-        window.onload = enterFullscreen;
+        window.onload = function() {
+            enterFullscreen();
+            updateClock(); // Ensure the clock is displayed immediately
+        };
     </script>
 </body>
 </html>
