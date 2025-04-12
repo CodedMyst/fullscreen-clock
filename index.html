@@ -1,56 +1,35 @@
-echo '<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Responsive Digital Clock</title>
+    <title>Fullscreen Clock</title>
     <style>
         body {
-            margin: 0;
-            background-color: black;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: "Arial", sans-serif;
-            overflow: hidden; /* Prevents scrollbars */
-        }
-        #clock {
-            text-align: center;
-            font-size: 10vw; /* Scales with viewport width */
+            margin: 0;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 48px;
         }
     </style>
 </head>
 <body>
-    <div id="clock"></div>
+    <div id="clock">00:00:00</div>
     <script>
         function updateClock() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, "0");
-            const minutes = String(now.getMinutes()).padStart(2, "0");
-            const seconds = String(now.getSeconds()).padStart(2, "0");
-            document.getElementById("clock").textContent = \`\${hours}:\${minutes}:\${seconds}\`;
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-
-        function goFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.mozRequestFullScreen) { // Firefox
-                elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { // IE/Edge
-                elem.msRequestFullscreen();
-            }
-        }
-
-        window.onload = () => {
-            goFullscreen();
-            updateClock();
-            setInterval(updateClock, 1000);
-        };
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
     </script>
 </body>
-</html>' > index.html
+</html>
